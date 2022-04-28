@@ -171,7 +171,7 @@ export class AwsV4Signer {
       this.headers.set('X-Amz-Content-Sha256', 'UNSIGNED-PAYLOAD')
     }
 
-    params.set('X-Amz-Date', this.datetime)
+    params.set('X-Osc-Date', this.datetime)
     if (this.sessionToken && !this.appendSessionToken) {
       params.set('X-Amz-Security-Token', this.sessionToken)
     }

@@ -21,8 +21,6 @@ const HOST_SERVICES = {
 };
 const UNSIGNABLE_HEADERS = [
   'authorization',
-  'content-type',
-  'content-length',
   'user-agent',
   'presigned-expires',
   'expect',

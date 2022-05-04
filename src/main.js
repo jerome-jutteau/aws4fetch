@@ -24,8 +24,6 @@ const HOST_SERVICES = {
 // https://github.com/aws/aws-sdk-js/blob/cc29728c1c4178969ebabe3bbe6b6f3159436394/lib/signers/v4.js#L190-L198
 const UNSIGNABLE_HEADERS = [
   'authorization',
-  'content-type',
-  'content-length',
   'user-agent',
   'presigned-expires',
   'expect',

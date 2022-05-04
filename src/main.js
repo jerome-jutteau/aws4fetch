@@ -189,7 +189,7 @@ export class AwsV4Signer {
       .map(header => header + ':' + (header === 'host' ? this.url.host : (this.headers.get(header) || '').replace(/\s+/g, ' ')))
       .join('\n')
 
-    this.credentialString = [this.datetime.slice(0, 8), this.region, this.service, 'aws4_request'].join('/')
+    this.credentialString = [this.datetime.slice(0, 8), this.region, this.service, 'osc4_request'].join('/')
 
     if (this.signQuery) {
       if (this.service === 's3' && !params.has('X-Amz-Expires')) {
@@ -279,7 +279,7 @@ export class AwsV4Signer {
       const kDate = await hmac('AWS4' + this.secretAccessKey, date)
       const kRegion = await hmac(kDate, this.region)
       const kService = await hmac(kRegion, this.service)
-      kCredentials = await hmac(kService, 'aws4_request')
+      kCredentials = await hmac(kService, 'osc4_request')
       this.cache.set(cacheKey, kCredentials)
     }
     return buf2hex(await hmac(kCredentials, await this.stringToSign()))

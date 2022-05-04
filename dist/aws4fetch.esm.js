@@ -109,7 +109,7 @@ class AwsV4Signer {
       if (this.service === 's3' && !params.has('X-Amz-Expires')) {
         params.set('X-Amz-Expires', '86400');
       }
-      params.set('X-Amz-Algorithm', 'AWS4-HMAC-SHA256');
+      params.set('X-Amz-Algorithm', 'OSC4-HMAC-SHA256');
       params.set('X-Amz-Credential', this.accessKeyId + '/' + this.credentialString);
       params.set('X-Amz-SignedHeaders', this.signedHeaders);
     }
@@ -159,7 +159,7 @@ class AwsV4Signer {
   }
   async authHeader() {
     return [
-      'AWS4-HMAC-SHA256 Credential=' + this.accessKeyId + '/' + this.credentialString,
+      'OSC4-HMAC-SHA256 Credential=' + this.accessKeyId + '/' + this.credentialString,
       'SignedHeaders=' + this.signedHeaders,
       'Signature=' + (await this.signature()),
     ].join(', ')
@@ -179,7 +179,7 @@ class AwsV4Signer {
   }
   async stringToSign() {
     return [
-      'AWS4-HMAC-SHA256',
+      'OSC4-HMAC-SHA256',
       this.datetime,
       this.credentialString,
       buf2hex(await hash(await this.canonicalString())),

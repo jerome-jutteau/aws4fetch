@@ -274,7 +274,7 @@ export class AwsV4Signer {
     const cacheKey = [this.secretAccessKey, date, this.region, this.service].join()
     let kCredentials = this.cache.get(cacheKey)
     if (!kCredentials) {
-      const kDate = await hmac('AWS4' + this.secretAccessKey, date)
+      const kDate = await hmac('OSC4' + this.secretAccessKey, date)
       const kRegion = await hmac(kDate, this.region)
       const kService = await hmac(kRegion, this.service)
       kCredentials = await hmac(kService, 'osc4_request')
